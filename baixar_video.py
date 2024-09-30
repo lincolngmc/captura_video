@@ -1,21 +1,22 @@
 #método que baixa vídeos do youtube
-#pip install pytube moviepy
+#pip install pytube moviepy pytubefix
 #https://pytube.io/en/latest/user/captions.html
 
+import pytube
+from pytubefix import YouTube
 
-from pytube import YouTube
 
-yt = YouTube(
-    'https://www.youtube.com/watch?v=mKUfbaLe-Lc',
-    # on_progress_callback=progress_func,
-    # on_complete_callback=complete_func,
-    # proxies=my_proxies,
-    use_oauth=False,
-    allow_oauth_cache=True
+#links = ['https://www.youtube.com/watch?v=hMQNmIdxOOI', 'https://www.youtube.com/watch?v=HNJV5RjJwq8', 'https://www.youtube.com/watch?v=wDkecsu-yu8']
+
+
+
+yt = YouTube(url='https://www.youtube.com/watch?v=HNJV5RjJwq8'
+    , use_oauth=True  # se True, o comando envia informação de 'usuario maior de idade' para youtube.
+    ,allow_oauth_cache=True
 )
 
 yt.streams.filter(only_audio=False)
-yt.streams
+#yt.streams
 stream = yt.streams.get_by_itag(18)
-print(stream)
+#print(stream)
 stream.download()
