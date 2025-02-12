@@ -10,7 +10,7 @@ from pytubefix import YouTube
 
 
 
-yt = YouTube(url='https://www.youtube.com/watch?v=HNJV5RjJwq8'
+yt = YouTube(url='https://www.youtube.com/watch?v=Wm592oJGltk'
     , use_oauth=True  # se True, o comando envia informação de 'usuario maior de idade' para youtube.
     ,allow_oauth_cache=True
 )
