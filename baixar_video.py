@@ -1,22 +1,19 @@
-#método que baixa vídeos do youtube
-#pip install pytube moviepy pytubefix
-#https://pytube.io/en/latest/user/captions.html
+import yt_dlp
 
-import pytube
-from pytubefix import YouTube
+#url = 'https://www.youtube.com/watch?v=-FRdGi-ARw0'
+url = 'https://www.youtube.com/watch?v=iyjny2WAKcg&t=2s&pp=2AECkAIB0gcJCRsBo7VqN5tD'
 
+ydl_opts = {
+    'format': 'bestvideo+bestaudio/best',
+    'outtmpl': '%(title)s.%(ext)s',
+    'ffmpeg_location': r'C:\Users\GMCORREIA\OneDrive\developer\python\video\ffmpeg\bin\ffmpeg.exe',
+    'merge_output_format': 'mp4',  # força saída em .mp4
+    'postprocessor_args': [
+        '-c:v', 'copy',  # copia o vídeo sem reencodar
+        '-c:a', 'aac',   # reencoda o áudio para AAC
+        '-b:a', '192k'   # define bitrate do áudio
+    ]
+}
 
-#links = ['https://www.youtube.com/watch?v=hMQNmIdxOOI', 'https://www.youtube.com/watch?v=HNJV5RjJwq8', 'https://www.youtube.com/watch?v=wDkecsu-yu8']
-
-
-
-yt = YouTube(url='https://www.youtube.com/watch?v=Wm592oJGltk'
-    , use_oauth=True  # se True, o comando envia informação de 'usuario maior de idade' para youtube.
-    ,allow_oauth_cache=True
-)
-
-yt.streams.filter(only_audio=False)
-#yt.streams
-stream = yt.streams.get_by_itag(18)
-#print(stream)
-stream.download()
+with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    ydl.download([url])
